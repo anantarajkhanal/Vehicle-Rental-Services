@@ -1,5 +1,6 @@
 import "./LandingPage.css";
 import landingcar from"../assets/landingpage-car.png"
+import showroomBackground from "../assets/empty-car-showroom 1.png";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
@@ -129,7 +130,10 @@ function LandingPage() {
     <main className="landing-page">
       <Header />
       <section className="hero">
-        <div className="hero-background" />
+      <div
+      className="hero-background"
+      style={{ backgroundImage: `url("${showroomBackground}")` }}
+        />
 
         <div className="hero-overlay" />
 
