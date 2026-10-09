@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Dashboard.css";
+import showroomBackground from "../assets/empty-car-showroom 1.png";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/LoginHeader";
 import Footer from "../components/Footer";
@@ -151,8 +152,10 @@ function Dashboard() {
         {/* HERO */}
 
         <section className="dashboard-hero">
-          <div className="dashboard-hero-background" />
-
+          <div
+            className="dashboard-hero-background"
+            style={{ backgroundImage: `url("${showroomBackground}")` }}
+          />
           <div className="dashboard-car-container">
             {heroCars.map((car, index) => (
               <div
