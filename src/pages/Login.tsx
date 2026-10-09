@@ -27,7 +27,7 @@ function Login() {
       password: "",
     };
 
-    let isValid = true;
+    //let isValid = true;
 
     const user = users.find(
       (user: { email: string; password: string }) =>
@@ -36,10 +36,10 @@ function Login() {
 
     if (!user) {
       newErrors.email = "Email not found";
-      isValid = false;
+     // isValid = false;
     } else if (user.password !== password) {
       newErrors.password = "Incorrect password";
-      isValid = false;
+      //isValid = false;
     } else {
       localStorage.setItem("currentUser", JSON.stringify(user));
 
