@@ -43,9 +43,9 @@ button {
 .dashboard-hero-background {
   position: absolute;
   inset: 0;
-  background-image: url("/Users/anantakhanal/Desktop/evolve/vehicle-renting/src/assets/empty-car-showroom 1.png");
   background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
   transform: scale(1.04);
   animation: dashboardHeroZoom 12s ease-in-out infinite alternate;
 }
