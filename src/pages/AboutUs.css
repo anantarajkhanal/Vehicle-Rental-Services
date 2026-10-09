@@ -1,0 +1,450 @@
+
+.about-page {
+  width: 100%;
+  background: #ffffff;
+  color: #0c0c0c;
+  font-family: "Avenir", "Avenir Next", sans-serif;
+  overflow: hidden;
+}
+
+/* TEAM BANNER */
+
+.about-team-banner {
+  width: 100%;
+  height: 540px;
+  position: relative;
+  background: #777777;
+  overflow: hidden;
+}
+
+.about-team-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  display: block;
+}
+
+.about-banner-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 60px 30px;
+  text-align: center;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.65),
+    rgba(0, 0, 0, 0.05) 75%
+  );
+}
+
+.about-banner-overlay span {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.about-banner-overlay h1 {
+  color: #ffffff;
+  font-size: clamp(30px, 4vw, 58px);
+  font-weight: 900;
+  line-height: 1.15;
+  margin: 0;
+  max-width: 850px;
+}
+
+/* SECTION LABELS */
+
+.about-section-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  color: #c62828;
+  margin-bottom: 15px;
+}
+
+/* ABOUT US */
+
+.about-intro {
+  width: 100%;
+  padding: 100px 12%;
+  text-align: center;
+  background: #ffffff;
+}
+
+.about-intro h2 {
+  font-size: clamp(36px, 4vw, 55px);
+  font-weight: 900;
+  margin: 0 0 35px;
+  letter-spacing: -1.5px;
+}
+
+.about-intro-content {
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.about-intro-content p {
+  font-size: 17px;
+  line-height: 1.9;
+  color: #555555;
+  margin: 0 0 20px;
+}
+
+.about-intro-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* SHARED SECTION HEADINGS */
+
+.about-section-heading {
+  text-align: center;
+  margin-bottom: 55px;
+}
+
+.about-section-heading h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 900;
+  letter-spacing: -1px;
+  margin: 0 0 15px;
+}
+
+.about-section-heading > p {
+  font-size: 16px;
+  color: #777777;
+  line-height: 1.7;
+  margin: 0 auto;
+  max-width: 650px;
+}
+
+/* SERVICES */
+
+.about-services {
+  padding: 100px 8%;
+  background: #f1f1f1;
+}
+
+.about-services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.about-service-card {
+  padding: 35px 28px;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  transition: transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.about-service-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.about-service-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #c62828;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 25px;
+}
+
+.about-service-card h3 {
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.4;
+  margin: 0 0 15px;
+}
+
+.about-service-card p {
+  color: #777777;
+  font-size: 15px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* VEHICLE TYPES */
+
+.about-vehicles {
+  padding: 100px 8%;
+  background: #ffffff;
+}
+
+.about-vehicles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.about-vehicle-card {
+  background: #ffffff;
+  border: 1px solid #e2e2e2;
+  border-radius: 7px;
+  overflow: hidden;
+  transition: transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.about-vehicle-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.about-vehicle-image {
+  width: 100%;
+  height: 220px;
+  background: #eeeeee;
+  overflow: hidden;
+}
+
+.about-vehicle-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.about-vehicle-card:hover
+.about-vehicle-image img {
+  transform: scale(1.05);
+}
+
+.about-vehicle-info {
+  padding: 25px 22px 30px;
+}
+
+.about-vehicle-info h3 {
+  font-size: 20px;
+  font-weight: 800;
+  margin: 0 0 12px;
+}
+
+.about-vehicle-info p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #777777;
+  margin: 0;
+}
+
+/* TEAM MEMBERS */
+
+.about-members {
+  padding: 100px 10% 120px;
+  background: #f5f5f3;
+}
+
+.about-members-heading {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.about-members-list {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.about-member-card {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  align-items: center;
+  gap: 40px;
+  padding: 25px;
+  background: #ffffff;
+  border: 1px solid #e2e2e2;
+  border-radius: 7px;
+  transition: transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.about-member-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.about-member-image {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 5px;
+  background: #e5e5e5;
+}
+
+.about-member-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.about-member-info {
+  padding: 15px 20px 15px 0;
+}
+
+.about-member-role {
+  display: inline-block;
+  padding: 8px 18px;
+  background: #c62828;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  border-radius: 3px;
+  margin-bottom: 18px;
+}
+
+.about-member-info h3 {
+  font-size: 28px;
+  font-weight: 900;
+  margin: 0 0 15px;
+}
+
+.about-member-info p {
+  color: #777777;
+  font-size: 15px;
+  line-height: 1.9;
+  margin: 0;
+  max-width: 650px;
+}
+
+/* TABLET */
+
+@media (max-width: 1100px) {
+  .about-services-grid,
+  .about-vehicles-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-member-card {
+    grid-template-columns: 250px 1fr;
+    gap: 30px;
+  }
+
+  .about-member-image {
+    height: 230px;
+  }
+
+  .about-services,
+  .about-vehicles {
+    padding: 80px 6%;
+  }
+
+  .about-members {
+    padding: 80px 6% 100px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+  .about-team-banner {
+    height: 380px;
+  }
+
+  .about-banner-overlay {
+    padding: 35px 20px;
+  }
+
+  .about-banner-overlay span {
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+
+  .about-intro {
+    padding: 70px 7%;
+  }
+
+  .about-intro-content p {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .about-services,
+  .about-vehicles {
+    padding: 70px 6%;
+  }
+
+  .about-section-heading {
+    margin-bottom: 40px;
+  }
+
+  .about-services-grid,
+  .about-vehicles-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .about-service-card {
+    padding: 30px;
+  }
+
+  .about-vehicle-image {
+    height: 240px;
+  }
+
+  .about-members {
+    padding: 70px 6% 80px;
+  }
+
+  .about-member-card {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 18px;
+  }
+
+  .about-member-image {
+    height: 280px;
+  }
+
+  .about-member-info {
+    padding: 5px 5px 15px;
+  }
+
+  .about-member-info h3 {
+    font-size: 24px;
+  }
+
+  .about-member-info p {
+    font-size: 14px;
+  }
+}
+
+/* SMALL MOBILE */
+
+@media (max-width: 400px) {
+  .about-team-banner {
+    height: 320px;
+  }
+
+  .about-intro h2,
+  .about-section-heading h2 {
+    font-size: 30px;
+  }
+
+  .about-member-image {
+    height: 230px;
+  }
+
+  .about-member-role {
+    font-size: 10px;
+  }
+}

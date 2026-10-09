@@ -1,0 +1,526 @@
+:root {
+  --red: #c62828;
+  --red-dark: #9f1f1f;
+  --black: #0c0c0c;
+  --dark: #111111;
+  --light: #f5f5f3;
+  --white: #ffffff;
+  --gray: #777777;
+  --border: rgba(255, 255, 255, 0.25);
+  --blue: #4169E1
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.landing-page {
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background: var(--light);
+  color: var(--black);
+  font-family: "Avenir", "Avenir Next";
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 92vh;
+  min-height: 650px;
+  overflow: hidden;
+  background: #151515;
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  background-image: url("/Users/anantakhanal/Desktop/evolve/vehicle-renting/src/assets/empty-car-showroom 1.png");
+  background-position: center;
+  background-size: cover;
+  transform: scale(1.04);
+  animation: heroZoom 12s ease-in-out infinite alternate;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: min(1400px, 90%);
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 5;
+  /* width: 47%; */
+  color: var(--white);
+}
+
+.hero-small-text,
+.section-label {
+  margin: 0 0 20px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+.hero-small-text {
+  color: var(--black);
+}
+
+.hero-text h1 {
+  margin: 0;
+  font-size: clamp(45px, 5vw, 80px);
+  line-height: 0.95;
+  font-weight: 900;
+  letter-spacing: -5px;
+  color: var(--red);
+}
+
+.rental-intro h2 span,
+.final-cta h2 span {
+  color: var(--red);
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.primary-button,
+.outline-button {
+  position: relative;
+  min-width: 160px;
+  padding: 15px 28px;
+  border: 1px solid var(--red);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.primary-button {
+  background: var(--red);
+  color: var(--white);
+}
+
+.primary-button:hover {
+  background: var(--red-dark);
+  transform: translateY(-3px);
+}
+
+.primary-button::after,
+.outline-button::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+}
+
+.outline-button {
+  background: transparent;
+  color: var(--black);
+  border-color: var(--black);
+}
+
+.outline-button::after {
+  border-color: rgba(0, 0, 0, 0.25);
+}
+
+.outline-button:hover {
+  background: var(--black);
+  color: var(--white);
+  transform: translateY(-3px);
+}
+
+.outline-button:hover::after {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.dark-button {
+  margin-top: 10px;
+}
+
+/* =========================
+   HERO VEHICLES
+========================= */
+
+.hero-car-container {
+  position: absolute;
+  right: 10%;
+  bottom: -5%;
+  width: 60%;
+  height: 70%;
+}
+
+.hero-car {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: carChange 16s infinite;
+}
+
+.hero-car img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  filter: saturate(0.9) contrast(1.08);
+}
+
+.hero-car:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.hero-car:nth-child(2) {
+  animation-delay: 4s;
+}
+
+.hero-car:nth-child(3) {
+  animation-delay: 8s;
+}
+
+.hero-car:nth-child(4) {
+  animation-delay: 12s;
+}
+
+
+.hero-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--red);
+}
+
+/* =========================
+   BRAND MARQUEE
+========================= */
+
+.brand-section {
+  width: 100%;
+  overflow: hidden;
+  padding: 30px 0;
+  background: var(--white);
+  border-top: 1px solid #dedede;
+  border-bottom: 1px solid #dedede;
+}
+
+.brand-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  animation: marquee 28s linear infinite;
+}
+
+.brand-item {
+  width: 190px;
+  height: 45px;
+  margin-right: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  opacity: 0.5;
+  transition: opacity 0.25s ease;
+  flex-shrink: 0;
+}
+
+.brand-item:hover {
+  opacity: 1;
+}
+
+.brand-item img {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+  filter: grayscale(1);
+}
+
+.brand-item span {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* =========================
+   RENTAL INTRO
+========================= */
+
+.rental-intro {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  width: min(1400px, 90%);
+  min-height: 720px;
+  margin: 0 auto;
+  padding: 110px 0;
+  gap: 80px;
+  align-items: center;
+}
+
+.intro-content {
+  max-width: 560px;
+}
+
+.section-label {
+  color: var(--black);
+}
+
+.intro-content h2 {
+  margin: 0;
+  font-size: clamp(50px, 5.5vw, 82px);
+  line-height: 0.9;
+  font-weight: 900;
+  letter-spacing: -4px;
+}
+
+.intro-description {
+  max-width: 500px;
+  margin: 30px 0;
+  color: var(--gray);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.intro-image {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 560px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+/* =========================
+   VEHICLES
+========================= */
+
+.vehicles-section {
+  width: min(1400px, 90%);
+  margin: 0 auto;
+  padding: 110px 0 130px;
+}
+
+.vehicles-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 55px;
+}
+
+.vehicles-header h2 {
+  margin: 0;
+  font-size: clamp(50px, 5.5vw, 82px);
+  line-height: 0.9;
+  font-weight: 900;
+  letter-spacing: -4px;
+  text-align: center;
+  color: var(--blue);
+}
+
+.vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  background: var(--white);
+  border: 1px solid #dedede;
+}
+
+.vehicle-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 330px;
+  background: var(--white);
+  border-right: 1px solid #dedede;
+  border-bottom: 1px solid #dedede;
+  transition: background 0.3s ease;
+}
+
+.vehicle-card:nth-child(2n) {
+  border-right: none;
+}
+
+.vehicle-card:nth-child(3),
+.vehicle-card:nth-child(4) {
+  border-bottom: none;
+}
+
+.vehicle-card:hover {
+  background: #fafafa;
+}
+
+.vehicle-image-wrapper {
+  min-height: 330px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--white);
+}
+
+.vehicle-image-wrapper img {
+  width: 72%;
+  height: 72%;
+  object-fit: contain;
+  object-position: center;
+  transition: transform 0.5s ease;
+}
+
+.vehicle-card:hover .vehicle-image-wrapper img {
+  transform: scale(1.05);
+}
+
+.vehicle-card-content {
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.vehicle-card-content h3 {
+  margin: 0 0 18px;
+  font-size: 26px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.vehicle-card-content span {
+  display: block;
+  color: var(--gray);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+@media (max-width: 800px) {
+  .vehicle-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vehicle-card {
+    grid-template-columns: 1fr 1fr;
+    border-right: none;
+  }
+
+  .vehicle-card:nth-child(3) {
+    border-bottom: 1px solid #dedede;
+  }
+
+  .vehicle-card:nth-child(4) {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 550px) {
+  .vehicles-section {
+    width: 88%;
+    padding: 70px 0;
+  }
+
+  .vehicles-header {
+    margin-bottom: 35px;
+  }
+
+  .vehicles-header h2 {
+    font-size: 48px;
+    letter-spacing: -3px;
+  }
+
+  .vehicle-card {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .vehicle-image-wrapper {
+    min-height: 230px;
+  }
+
+  .vehicle-image-wrapper img {
+    width: 65%;
+    height: 65%;
+  }
+
+  .vehicle-card-content {
+    padding: 25px 30px 35px;
+  }
+
+  .vehicle-card-content h3 {
+    font-size: 24px;
+  }
+}
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes heroZoom {
+  from {
+    transform: scale(1.04);
+  }
+
+  to {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes carChange {
+  0% {
+    opacity: 0;
+    transform: translateX(80px) scale(0.96);
+  }
+
+  5% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+
+  23% {
+    opacity: 1;
+    transform: translateX(-15px) scale(1.02);
+  }
+
+  25% {
+    opacity: 0;
+    transform: translateX(-80px) scale(0.96);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+

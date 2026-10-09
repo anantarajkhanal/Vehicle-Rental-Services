@@ -1,0 +1,142 @@
+
+.vehicle-card {
+  font-family: "Avenir", "Avenir Next";
+  position: relative;
+  min-height: 455px;
+  padding: 25px;
+  border: 1px solid #d8d8d8;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.vehicle-card-image {
+  width: 100%;
+  height: 235px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vehicle-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.vehicle-card-details {
+  padding-top: 5px;
+  padding-bottom: 95px;
+}
+
+.vehicle-card-heading {
+  margin-bottom: 18px;
+}
+
+.vehicle-card-heading h3 {
+  margin: 0 0 5px;
+  color: #0c0c0c;
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+
+.vehicle-card-heading p {
+  margin: 0;
+  color: #777777;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.vehicle-card-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+}
+
+.vehicle-card-info div {
+  min-width: 65px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.vehicle-card-info span {
+  color: #999999;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.vehicle-card-info strong {
+  color: #111111;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.vehicle-card-continue {
+  position: absolute;
+  right: 25px;
+  bottom: 92px;
+  width: 125px;
+  height: 43px;
+  border: 1px solid #111111;
+  border-radius: 0;
+  background: #4169E1;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.vehicle-card-continue::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+}
+
+.vehicle-card-continue:hover {
+  background: #3157c4;
+  transform: translateY(-2px);
+}
+
+.vehicle-card-prices {
+  position: absolute;
+  left: 25px;
+  right: 25px;
+  bottom: 15px;
+  display: flex;
+  gap: 8px;
+}
+
+.vehicle-price-box {
+  flex: 1;
+  min-height: 62px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d4d4d4;
+  background: #f0f0f0;
+}
+
+.vehicle-price-box span {
+  margin-bottom: 5px;
+  color: #777777;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.vehicle-price-box strong {
+  color: #c62828;
+  font-size: 13px;
+  font-weight: 900;
+}
