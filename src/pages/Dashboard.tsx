@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import "./Dashboard.css";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/LoginHeader";
@@ -58,6 +58,7 @@ interface Booking {
   totalPrice: number;
 
   bookingDate?: string;
+  _storageIndex?: number;
 }
 
 function Dashboard() {
@@ -65,6 +66,9 @@ function Dashboard() {
 
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [userName, setUserName] = useState("Driver");
+  const [editingBooking, setEditingBooking] = useState<Booking | null>(null);
+  const [editForm, setEditForm] = useState({ pickupDate: "", pickupTime: "", returnDate: "", returnTime: "", mobileNumber: "", withDriver: false });
+  const [cancellingBooking, setCancellingBooking] = useState<Booking | null>(null);
 
   useEffect(() => {
     const currentUser = JSON.parse(
@@ -83,10 +87,8 @@ function Dashboard() {
     );
 
     const userBookings = savedBookings
-      .filter(
-        (booking: Booking) =>
-          booking.userEmail === currentUser.email
-      )
+      .map((booking: Booking, storageIndex: number) => ({ ...booking, _storageIndex: storageIndex }))
+      .filter((booking: Booking) => booking.userEmail === currentUser.email)
       .reverse();
 
     setBookings(userBookings);
@@ -162,6 +164,83 @@ function Dashboard() {
     }
 
     return 0;
+  };
+
+  const openEditBooking = (booking: Booking) => {
+    setEditForm({
+      pickupDate: booking.pickupDate || "",
+      pickupTime: booking.pickupTime || "",
+      returnDate: booking.returnDate || "",
+      returnTime: booking.returnTime || "",
+      mobileNumber: booking.mobileNumber || "",
+      withDriver: Boolean(booking.withDriver),
+    });
+    setEditingBooking(booking);
+  };
+
+  const saveBookingChanges = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!editingBooking || editingBooking._storageIndex === undefined) return;
+
+    const pickup = new Date(`${editForm.pickupDate}T${editForm.pickupTime}`);
+    const returned = new Date(`${editForm.returnDate}T${editForm.returnTime}`);
+
+    if (Number.isNaN(pickup.getTime()) || Number.isNaN(returned.getTime()) || returned <= pickup) {
+      window.alert("Return date and time must be after the pickup date and time.");
+      return;
+    }
+
+    const totalDays = Math.max(1, Math.ceil((returned.getTime() - pickup.getTime()) / (1000 * 60 * 60 * 24)));
+    const previousDays = Math.max(1, Number(editingBooking.totalDays) || 1);
+    const previousRentalPrice = getRentalPrice(editingBooking);
+    const previousDriverPrice = getDriverPrice(editingBooking);
+    const rentalPerDay = previousRentalPrice / previousDays;
+    const driverPerDay = editingBooking.withDriver ? previousDriverPrice / previousDays : 0;
+    const rentalPrice = Math.round(rentalPerDay * totalDays * 100) / 100;
+    const driverPrice = editingBooking.withDriver ? Math.round(driverPerDay * totalDays * 100) / 100 : 0;
+
+    const updatedBooking: Booking = {
+      ...editingBooking,
+      pickupDate: editForm.pickupDate,
+      pickupTime: editForm.pickupTime,
+      returnDate: editForm.returnDate,
+      returnTime: editForm.returnTime,
+      mobileNumber: editForm.mobileNumber.trim(),
+      withDriver: editingBooking.withDriver,
+      totalDays,
+      rentalPrice,
+      driverPrice: editingBooking.withDriver ? driverPrice : 0,
+      totalPrice: Math.round((rentalPrice + (editingBooking.withDriver ? driverPrice : 0)) * 100) / 100,
+    };
+
+    const savedBookings: Booking[] = JSON.parse(localStorage.getItem("bookings") || "[]");
+    savedBookings[editingBooking._storageIndex] = { ...updatedBooking, _storageIndex: undefined };
+    localStorage.setItem("bookings", JSON.stringify(savedBookings));
+
+    setBookings((current) => current.map((booking) =>
+      booking._storageIndex === editingBooking._storageIndex ? updatedBooking : booking
+    ));
+    setEditingBooking(null);
+  };
+
+  const confirmCancellation = () => {
+    if (!cancellingBooking || cancellingBooking._storageIndex === undefined) return;
+
+    const removedIndex = cancellingBooking._storageIndex;
+    const savedBookings: Booking[] = JSON.parse(localStorage.getItem("bookings") || "[]");
+    savedBookings.splice(removedIndex, 1);
+    localStorage.setItem("bookings", JSON.stringify(savedBookings));
+
+    setBookings((current) => current
+      .filter((booking) => booking._storageIndex !== removedIndex)
+      .map((booking) => ({
+        ...booking,
+        _storageIndex: booking._storageIndex !== undefined && booking._storageIndex > removedIndex
+          ? booking._storageIndex - 1
+          : booking._storageIndex,
+      }))
+    );
+    setCancellingBooking(null);
   };
 
   return (
@@ -504,9 +583,11 @@ function Dashboard() {
                         VEHICLE RENTAL SERVICES
                       </span>
 
-                      <span>
-                        BOOKING CONFIRMED
-                      </span>
+                      <div className="invoice-actions">
+                        <span className="booking-confirmed-label">BOOKING CONFIRMED</span>
+                        <button type="button" onClick={() => openEditBooking(booking)}>Edit booking</button>
+                        <button type="button" className="cancel-booking-button" onClick={() => setCancellingBooking(booking)}>Delete booking</button>
+                      </div>
                     </div>
                   </article>
                 );
@@ -514,6 +595,44 @@ function Dashboard() {
             </div>
           )}
         </section>
+
+        {editingBooking && (
+          <div className="booking-modal-backdrop" role="presentation" onClick={() => setEditingBooking(null)}>
+            <section className="booking-modal" role="dialog" aria-modal="true" aria-labelledby="edit-booking-title" onClick={(event) => event.stopPropagation()}>
+              <button className="booking-modal-close" type="button" onClick={() => setEditingBooking(null)} aria-label="Close">×</button>
+              <span className="dashboard-eyebrow">MANAGE RESERVATION</span>
+              <h2 id="edit-booking-title">Edit your booking</h2>
+              <p>Update your pickup, return and contact details. The estimated total will adjust to the rental duration.</p>
+              <form onSubmit={saveBookingChanges} className="booking-edit-form">
+                <label>Pickup date<input type="date" required value={editForm.pickupDate} onChange={(e) => setEditForm({ ...editForm, pickupDate: e.target.value })} /></label>
+                <label>Pickup time<input type="time" required value={editForm.pickupTime} onChange={(e) => setEditForm({ ...editForm, pickupTime: e.target.value })} /></label>
+                <label>Return date<input type="date" required value={editForm.returnDate} onChange={(e) => setEditForm({ ...editForm, returnDate: e.target.value })} /></label>
+                <label>Return time<input type="time" required value={editForm.returnTime} onChange={(e) => setEditForm({ ...editForm, returnTime: e.target.value })} /></label>
+                <label className="booking-edit-full">Mobile number<input type="tel" required value={editForm.mobileNumber} onChange={(e) => setEditForm({ ...editForm, mobileNumber: e.target.value })} /></label>
+                <div className="booking-modal-actions booking-edit-full"><button type="button" className="booking-secondary-button" onClick={() => setEditingBooking(null)}>Keep as is</button><button type="submit" className="booking-primary-button">Save changes</button></div>
+              </form>
+            </section>
+          </div>
+        )}
+
+        {cancellingBooking && (
+          <div className="booking-modal-backdrop" role="presentation" onClick={() => setCancellingBooking(null)}>
+            <section className="booking-modal cancellation-modal" role="dialog" aria-modal="true" aria-labelledby="cancel-booking-title" onClick={(event) => event.stopPropagation()}>
+              <button className="booking-modal-close" type="button" onClick={() => setCancellingBooking(null)} aria-label="Close">×</button>
+              <span className="dashboard-eyebrow">CANCELLATION FEE</span>
+              <h2 id="cancel-booking-title">Cancel this booking?</h2>
+              <p>To delete this reservation, the demo cancellation fee is 5% of the booking total.</p>
+              <div className="cancellation-amount"><span>Booking total</span><strong>{formatCurrency(Number(cancellingBooking.totalPrice) || 0)}</strong><span>Cancellation fee (5%)</span><strong className="cancellation-fee">{formatCurrency(Math.round((Number(cancellingBooking.totalPrice) || 0) * 0.05 * 100) / 100)}</strong></div>
+                  <div className="demo-qr-wrap">
+                            <img
+                              src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=DEMO-ONLY-NOT-A-REAL-PAYMENT"
+                              alt="QR code"
+                            />
+                          </div>
+                 <div className="booking-modal-actions"><button type="button" className="booking-secondary-button" onClick={() => setCancellingBooking(null)}>Keep booking</button><button type="button" className="booking-primary-button" onClick={confirmCancellation}>Done, cancel booking</button></div>
+            </section>
+          </div>
+        )}
       </main>
 
       <Footer />
