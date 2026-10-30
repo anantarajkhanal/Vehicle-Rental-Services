@@ -1,127 +1,300 @@
+
 .site-header {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
   width: 100%;
-  padding: 20px 0;
+  padding: 12px 0;
+  box-sizing: border-box;
   pointer-events: none;
   font-family: "Avenir", "Avenir Next", sans-serif;
 }
 
 .header-inner {
-  width: min(1400px, 90%);
-  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  width: 100%;
+  padding: 0 18px;
+  box-sizing: border-box;
 }
 
-.header-brand,
-.header-nav {
-  pointer-events: auto;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 15px;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-  backdrop-filter: blur(12px);
-}
+/* Logo section */
 
 .header-brand {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px 18px 8px 9px;
-  cursor: pointer;
+  gap: 10px;
+  padding: 7px 15px 7px 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 5px 22px rgba(0, 0, 0, 0.07);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #0c0c0c;
+  text-decoration: none;
+  pointer-events: auto;
+  flex-shrink: 0;
 }
 
 .header-logo {
-  width: 36px;
-  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
   overflow: hidden;
 }
 
 .header-logo img {
   width: 100%;
   height: 100%;
-  display: block;
   object-fit: contain;
 }
 
-.header-brand span {
-  color: #0c0c0c;
+.header-brand > span:last-child {
   font-size: 11px;
   font-weight: 900;
-  letter-spacing: 1.8px;
+  letter-spacing: 1.4px;
+  white-space: nowrap;
+}
+
+/* Navigation section */
+
+.header-right {
+  display: flex;
+  align-items: center;
+  pointer-events: auto;
 }
 
 .header-nav {
-  min-width: 800px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 100px;
-  padding: 9px 14px;
+  gap: 5px;
+  width: fit-content;
+  padding: 5px 7px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 5px 22px rgba(0, 0, 0, 0.07);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-sizing: border-box;
 }
 
-.header-nav a {
-  padding: 11px 12px;
+.header-nav a,
+.header-login {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
   color: #0c0c0c;
   text-decoration: none;
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 1.8px;
-  transition: color 0.25s ease;
-}
-
-.header-nav a:hover {
-  color: #c62828;
-}
-
-.header-login {
-  padding: 11px 12px;
-  border: none;
-  background: transparent;
-  color: #111111;
   font-family: inherit;
   font-size: 10px;
   font-weight: 900;
-  letter-spacing: 1.8px;
+  letter-spacing: 1.2px;
+  white-space: nowrap;
   cursor: pointer;
+  transition: color 0.2s ease;
 }
 
+.header-nav a:hover,
 .header-login:hover {
   color: #c62828;
 }
 
+/* User profile */
+
+.header-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 55px;
+  padding: 3px 8px;
+}
+
+.profile-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  background: #f2f2f2;
+  color: #555;
+}
+
+.profile-icon svg {
+  width: 17px;
+  height: 17px;
+}
+
+.profile-name {
+  max-width: 100px;
+  overflow: hidden;
+  color: #0c0c0c;
+  font-size: 10px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Signup button */
+
 .header-nav .signup-button {
   position: relative;
-  margin-left: 8px;
-  padding: 11px 22px;
+  margin-left: 3px;
+  padding: 11px 16px;
   border: 1px solid #2f6fce;
-  border-radius: 9px;
+  border-radius: 8px;
   background: #4169e1;
-  color: #ffffff;
+  color: #fff;
   font-family: inherit;
   font-size: 10px;
   font-weight: 900;
-  letter-spacing: 1.8px;
+  letter-spacing: 1.2px;
+  white-space: nowrap;
   cursor: pointer;
+  transition: background 0.2s ease;
 }
 
 .header-nav .signup-button::after {
-  content: "";
   position: absolute;
+  content: "";
   inset: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 5px;
   pointer-events: none;
 }
 
 .header-nav .signup-button:hover {
   background: #3157c4;
+}
+
+/* Tablet */
+
+@media (max-width: 850px) {
+  .header-inner {
+    padding: 0 10px;
+  }
+
+  .header-brand {
+    gap: 7px;
+    padding-right: 10px;
+  }
+
+  .header-brand > span:last-child {
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+
+  .header-nav {
+    gap: 2px;
+    padding: 4px;
+  }
+
+  .header-nav a,
+  .header-login {
+    padding: 9px 8px;
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+
+  .header-nav .signup-button {
+    padding: 10px 12px;
+    font-size: 9px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .site-header {
+    padding: 9px 0;
+  }
+
+  .header-inner {
+    padding: 0 6px;
+    gap: 5px;
+  }
+
+  .header-brand {
+    gap: 6px;
+    padding: 6px 8px 6px 6px;
+  }
+
+  .header-logo {
+    width: 28px;
+    height: 28px;
+  }
+
+  .header-brand > span:last-child {
+    font-size: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .header-nav {
+    gap: 0;
+    padding: 3px;
+  }
+
+  .header-nav a,
+  .header-login {
+    padding: 8px 5px;
+    font-size: 8px;
+    letter-spacing: 0.4px;
+  }
+
+  .header-nav .signup-button {
+    margin-left: 2px;
+    padding: 9px 7px;
+    font-size: 8px;
+  }
+
+  .header-profile {
+    min-width: 40px;
+    padding: 2px 4px;
+  }
+
+  .profile-icon {
+    width: 25px;
+    height: 25px;
+  }
+
+  .profile-name {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 390px) {
+  .header-inner {
+    padding: 0 4px;
+  }
+
+  .header-brand > span:last-child {
+    max-width: 65px;
+    white-space: normal;
+    line-height: 1.2;
+  }
+
+  .header-nav a,
+  .header-login {
+    padding: 8px 4px;
+    font-size: 7px;
+  }
+
+  .header-nav .signup-button {
+    padding: 9px 5px;
+    font-size: 7px;
+  }
 }
